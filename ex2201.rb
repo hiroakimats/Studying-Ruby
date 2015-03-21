@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'dbi'
 
-class BookInfos
+class BookInfo
   def initialize(id, title, author, page, pulish_date, primary)
     @id = id
     @title = title
@@ -28,32 +28,16 @@ class BookInfoManager
   def run
     while true
       print "０：蔵書データベース初期化"
-      print "１：蔵書データの登録"
-      print "２：蔵書データの表示："
-      print "９：終了"
-      print "操作を選んでください：(0,1,2,9)"
-      op = gets.chomp.to_i
-    
-      case
-      when 0 == num
-        initBookInfos
-      when 1 == num
-        addBookInfo
-      when 2 == num
-        listBookInfo
-      when 9 == num
-        @dbh.disconnect
-        print "終了しました"
-        break;
-      else
-      end
     end
   end
 
 end    
       
-      
-      
+book_info_manager = BookInfoManager.new("bookinfo_sqlite.db")
+
+book_info_manager.run
+
+
 
 
 
@@ -107,9 +91,6 @@ sth.finish
 
 dbh.disconnect
 
-book_info_manager = BookInfoManager.new("bookinfo_sqlite.db")
-
-book_info_manager.run
 
   
   
