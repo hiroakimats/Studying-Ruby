@@ -4,9 +4,9 @@ require 'dbi'
 require 'date'
 
 class BookInfoManager
-  def initialize(db_name)
-    @db_name = db_name
-    @dbh = DBI.connect('DBI:SQLite3:@db_name')
+  def initialize(sqlite_name)
+    @db_name = sqlite_name
+    @dbh = DBI.connect("DBI:SQLite3:#{@db_name}")
   end
 
   def initBookInfos
@@ -32,13 +32,16 @@ class BookInfoManager
   
   def run
     while true
-      print "０：蔵書データベース初期化"
-      print "操作を選んでください：(0, 1, 2, 9)"
-      print "\n"
+      print "０：蔵書データベース初期化\n"
+      print "１：蔵書データの登録\n"
+      print "２：蔵書データの表示\ｎ"
+      print "９：終了\n"
+      print "操作を選んでください：(0, 1, 2, 9):"
       op = gets.chomp.to_i
       
       case
       when 0 == op
+        
         initBookInfos
       when 9 == op
         @dbh.disconnect
