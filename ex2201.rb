@@ -10,8 +10,11 @@ class BookInfoManager
   end
 
   def initBookInfos
+    # db内に同名のテーブルがあったら削除する
+    @dbh.do("drop table if exists bookinfos")
+    
     # 蔵書データベースのテーブル作成
-    dbh.do("create table bookinfos(
+    @dbh.do("create table bookinfos(
       id            varchar(50)         not null,
       title         varchar(100)        not null,
       author        varchar(100)        not null,
@@ -31,12 +34,16 @@ class BookInfoManager
     while true
       print "０：蔵書データベース初期化"
       print "操作を選んでください：(0, 1, 2, 9)"
+      print "\n"
       op = gets.chomp.to_i
       
       case
-      when 0
+      when 0 == op
         initBookInfos
-        dbh.disconnect
+      when 9 == op
+        @dbh.disconnect
+        print "プログラムを終了しました"
+        break;
       else
       end
     end
