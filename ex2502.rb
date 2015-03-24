@@ -21,10 +21,6 @@ server.mount_proc("/testprog") {|req, res|
 }
 
 
-trap(:INT) do 
-  server.shutdown
-end
+server.shutdown
 
-
-server.start
 
