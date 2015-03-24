@@ -3,6 +3,13 @@ require 'rubygems'
 require 'dbi'
 require 'date'
 
+# 蔵書クラス
+class BookInfo
+  
+end
+
+
+# 蔵書管理クラス
 class BookInfoManager
   def initialize(sqlite_name)
     @db_name = sqlite_name
